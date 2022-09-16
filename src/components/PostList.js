@@ -12,14 +12,22 @@ class PostList extends Component {
     axios
       .get("https://jsonplaceholder.typicode.com/posts")
       .then((response) => {
-        console.log(response);
+        this.setState({ posts: response.data });
       })
       .catch((error) => {
         console.log(error.message);
+        this.setState({ errorMsg: "Error retreiving data" });
       });
   }
   render() {
-    return <div>Post list</div>;
+    const { posts, errorMsg } = this.state;
+    return (
+      <div>
+        Post list
+        {posts.length ? posts.map((post) => <div key={post.id}>{post.title}</div>) : null}
+        {errorMsg ? <div>{errorMsg}</div> : null}
+      </div>
+    );
   }
 }
 
