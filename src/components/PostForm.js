@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import axios from "axios";
 export class PostForm extends Component {
   constructor() {
     super();
@@ -15,6 +15,14 @@ export class PostForm extends Component {
   submitHandeler = (e) => {
     e.preventDefault();
     console.log(this);
+    axios
+      .post("https://jsonplaceholder.typicode.com/posts", this.state)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   render() {
